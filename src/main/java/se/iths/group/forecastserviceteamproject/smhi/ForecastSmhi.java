@@ -16,7 +16,7 @@ import java.util.Map;
     "timeSeries"
 })
 @Generated("jsonschema2pojo")
-public class Example {
+public class ForecastSmhi {
 
     @JsonProperty("approvedTime")
     private String approvedTime;

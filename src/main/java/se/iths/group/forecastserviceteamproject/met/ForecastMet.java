@@ -14,7 +14,7 @@ import java.util.Map;
     "properties"
 })
 @Generated("jsonschema2pojo")
-public class Example {
+public class ForecastMet {
 
     @JsonProperty("type")
     private String type;
