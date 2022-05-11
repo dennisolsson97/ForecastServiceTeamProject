@@ -10,6 +10,7 @@ import se.iths.group.forecastserviceteamproject.smhi.TimeSeries;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SmhiClient {
     RestTemplate restTemplate = new RestTemplate();
@@ -25,19 +26,19 @@ public class SmhiClient {
 
     }
 
-    public void getTime(){
+    public String getTime(){
         ForecastSmhi forecastSmhi = responseAllData.getBody();
         String time = forecastSmhi.getTimeSeries().get(23).getValidTime();
-        System.out.println(time);
+        return time;
     }
 
     public void getTemperature() {
         ForecastSmhi forecastSmhi = responseAllData.getBody();
         List<Parameter> parameters = forecastSmhi.getTimeSeries().get(23).getParameters();
-        parameters.stream()
+        List<List<Double>> temperature = parameters.stream()
                 .filter(p -> p.getName().equals("t"))
-                .map((p) -> p.getValues())
-                .forEach(System.out::println);
+                .map((p) -> p.getValues()).collect(Collectors.toList());
+
     }
 
     public void getHumidity() {
