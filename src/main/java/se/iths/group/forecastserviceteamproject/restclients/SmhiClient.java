@@ -32,22 +32,35 @@ public class SmhiClient {
         return time;
     }
 
-    public void getTemperature() {
+    public Double getTemperature() {
         ForecastSmhi forecastSmhi = responseAllData.getBody();
         List<Parameter> parameters = forecastSmhi.getTimeSeries().get(23).getParameters();
         List<List<Double>> temperature = parameters.stream()
                 .filter(p -> p.getName().equals("t"))
-                .map((p) -> p.getValues()).collect(Collectors.toList());
+                .map(p -> p.getValues()).collect(Collectors.toList());
+
+        Double doubleTemperature = temperature.get(0).get(0);
+
+
+
+
+            return doubleTemperature;
 
     }
 
-    public void getHumidity() {
+    public Double getHumidity() {
         ForecastSmhi forecastSmhi = responseAllData.getBody();
         List<Parameter> parameters = forecastSmhi.getTimeSeries().get(23).getParameters();
-        parameters.stream()
+
+       List<List<Double>> doubleList = parameters.stream()
                 .filter(p -> p.getName().equals("r"))
-                .map((p) -> p.getValues())
-                .forEach(System.out::println);
+                .map(p -> p.getValues()).collect(Collectors.toList());
+
+        Double doubleHumidity = doubleList.get(0).get(0);
+
+        return doubleHumidity;
+
+
     }
 
 }

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "forecast"
 })
 @Generated("jsonschema2pojo")
-public class WeatherAPI {
+public class ForecastWeatherAPI {
 
     @JsonProperty("location")
     private Location location;

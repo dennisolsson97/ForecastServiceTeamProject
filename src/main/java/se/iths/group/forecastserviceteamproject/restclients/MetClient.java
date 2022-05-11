@@ -22,12 +22,13 @@ public class MetClient {
 
     }
 
-    public void getTime(){
+    public String getTime(){
         String time = forecastMet.getProperties().getTimeseries().get(24).getTime();
-        System.out.println(time);
+
+        return time;
     }
 
-    public void getTemperature(){
+    public Double getTemperature(){
         Double temperature = forecastMet.getProperties()
                 .getTimeseries()
                 .get(24)
@@ -36,10 +37,10 @@ public class MetClient {
                 .getDetails()
                 .getAirTemperature();
 
-        System.out.println(temperature);
+        return temperature;
     }
 
-    public void getHumidity(){
+    public Double getHumidity(){
         Double humidity = forecastMet.getProperties()
                 .getTimeseries()
                 .get(24)
@@ -48,6 +49,6 @@ public class MetClient {
                 .getDetails()
                 .getRelativeHumidity();
 
-        System.out.println(humidity);
+        return humidity;
     }
 }
