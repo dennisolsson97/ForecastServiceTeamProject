@@ -13,41 +13,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "text",
-    "icon",
     "code"
 })
 @Generated("jsonschema2pojo")
 public class Condition__1 {
 
-    @JsonProperty("text")
-    private String text;
-    @JsonProperty("icon")
-    private String icon;
     @JsonProperty("code")
     private Integer code;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @JsonProperty("icon")
-    public String getIcon() {
-        return icon;
-    }
-
-    @JsonProperty("icon")
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
 
     @JsonProperty("code")
     public Integer getCode() {
