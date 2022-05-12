@@ -39,7 +39,12 @@ public class WeatherAPIClient {
         String local = localTimeString.substring(0, 2);
         Integer hourNow = Integer.parseInt(local);
 
-        double temperature = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getTempC();
+        double temperature = weatherAPI.getForecast()
+                .getForecastday()
+                .get(1)
+                .getHour()
+                .get(hourNow)
+                .getTempC();
 
         return temperature;
 
@@ -50,7 +55,13 @@ public class WeatherAPIClient {
         String local = localTimeString.substring(0, 2);
         Integer hourNow = Integer.parseInt(local);
 
-        double humidity = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getHumidity();
+        double humidity = weatherAPI
+                .getForecast()
+                .getForecastday()
+                .get(1)
+                .getHour()
+                .get(hourNow)
+                .getHumidity();
 
         return humidity;
     }

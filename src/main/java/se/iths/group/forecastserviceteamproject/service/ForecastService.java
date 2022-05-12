@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import se.iths.group.forecastserviceteamproject.met.ForecastMet;
 import se.iths.group.forecastserviceteamproject.restclients.MetClient;
 import se.iths.group.forecastserviceteamproject.restclients.SmhiClient;
+import se.iths.group.forecastserviceteamproject.restclients.WeatherAPIClient;
 import se.iths.group.forecastserviceteamproject.smhi.ForecastSmhi;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ForecastService {
 
@@ -18,24 +17,48 @@ public class ForecastService {
     @Autowired
     MetClient metClient;
 
-   public void getBestWeather(){
+    @Autowired
+    WeatherAPIClient weatherAPIClient;
 
-      String timeSmhi = smhiClient.getTime();
+    public static void main(String[] args) {
+        ForecastService forecastService = new ForecastService();
+        forecastService.getBestWeather();
+    }
 
-      String timeMet = metClient.getTime();
+    public void getBestWeather() {
 
-      Double temparatureMet = metClient.getTemperature();
+        String timeSmhi = smhiClient.getTime();
 
-       Double temperatureSmhi = smhiClient.getTemperature();
+        String timeMet = metClient.getTime();
 
-       Double humiditySmhi = smhiClient.getHumidity();
+        Double temparatureMet = metClient.getTemperature();
 
-       Double humidity = metClient.getHumidity();
+        Double temperatureSmhi = smhiClient.getTemperature();
 
-       Map<ForecastMet, ForecastSmhi> additionalProperties = new HashMap<ForecastMet, ForecastSmhi>();
+        Double temperatureWeatherAPI = weatherAPIClient.getTemperature();
 
-       //Map<String, Object> additionalProperties = new HashMap<String, Object>();
+        List<Double> temperatures = new ArrayList<>();
 
+        temperatures.add(temparatureMet);
+
+        temperatures.add(temperatureSmhi);
+
+        temperatures.add(temperatureWeatherAPI);
+
+        Collections.sort(temperatures);
+
+        for (Double t:temperatures) {
+            System.out.println(t);
+        }
+
+
+        Double humiditySmhi = smhiClient.getHumidity();
+
+        Double humidity = metClient.getHumidity();
+
+        //Map<String,> additionalProperties = new HashMap<ForecastMet, ForecastSmhi>();
+
+        //Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 
     }
