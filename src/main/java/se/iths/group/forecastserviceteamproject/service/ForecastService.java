@@ -38,9 +38,9 @@ public class ForecastService {
     public WeatherAttributes getBestWeather() {
 
 
-        WeatherAttributes metAttributes = new WeatherAttributes(metClient.getTemperature(), metClient.getHumidity(), metClient.getTime());
-        WeatherAttributes smhiAttributes = new WeatherAttributes(smhiClient.getTemperature(), smhiClient.getHumidity(), smhiClient.getTime());
-        WeatherAttributes apiAttributes = new WeatherAttributes(weatherAPIClient.getTemperature(), weatherAPIClient.getHumidity(), weatherAPIClient.getTime());
+        WeatherAttributes metAttributes = new WeatherAttributes("METI", metClient.getTemperature(), metClient.getHumidity(), metClient.getTime());
+        WeatherAttributes smhiAttributes = new WeatherAttributes("SMHI", smhiClient.getTemperature(), smhiClient.getHumidity(), smhiClient.getTime());
+        WeatherAttributes apiAttributes = new WeatherAttributes("WeatherAPI", weatherAPIClient.getTemperature(), weatherAPIClient.getHumidity(), weatherAPIClient.getTime());
 
         List<WeatherAttributes> attributes = new ArrayList<>();
 
@@ -65,6 +65,10 @@ public class ForecastService {
 
         WeatherAttributes bestWeatherValue = attributes.get(0);
 
+        System.out.println(metAttributes);
+        System.out.println(smhiAttributes);
+        System.out.println(apiAttributes);
+
         System.out.println(bestWeatherValue);
 
 
@@ -72,63 +76,6 @@ public class ForecastService {
     }
 
 
-    public Map getBestWeather2() {
-
-        String timeSmhi = smhiClient.getTime();
-
-        String timeMet = metClient.getTime();
-
-        Double timeSMhiDouble = Double.parseDouble(timeSmhi);
-
-        Double timeMetDouble = Double.parseDouble(timeMet);
-
-        Double temparatureMet = metClient.getTemperature();
-
-        Double temperatureSmhi = smhiClient.getTemperature();
-
-        Double temperatureWeatherAPI = weatherAPIClient.getTemperature();
-
-        Double smhiHumidity = smhiClient.getHumidity();
-
-        Double metHumidity = metClient.getHumidity();
-
-        Map<String, Double> mapSmhi = new HashMap<String, Double>();
-
-        mapSmhi.put("Time", timeSMhiDouble);
-        mapSmhi.put("Temperature", temperatureSmhi);
-        mapSmhi.put("Humidity", smhiHumidity);
-
-        List<Double> temperatures = new ArrayList<>();
-
-        temperatures.add(temparatureMet);
-
-        temperatures.add(temperatureSmhi);
-
-        temperatures.add(temperatureWeatherAPI);
-
-        Collections.sort(temperatures);
-
-      /*  for (Double t:temperatures) {
-            System.out.println(t);
-        }*/
-
-        Double bestWheatherValue = temperatures.get(2);
-
-        if (temperatures.get(2) == temperatures.get(1) || temperatures.get(2) == temperatures.get(0)) {
-
-            // bestWheatherValue =
-        }
 
 
-        Double humiditySmhi = smhiClient.getHumidity();
-
-        Double humidity = metClient.getHumidity();
-
-        //Map<String,> additionalProperties = new HashMap<ForecastMet, ForecastSmhi>();
-
-        //Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-        return mapSmhi;
-
-    }
 }

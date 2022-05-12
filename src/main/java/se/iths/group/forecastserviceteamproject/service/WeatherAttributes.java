@@ -2,13 +2,17 @@ package se.iths.group.forecastserviceteamproject.service;
 
 public class WeatherAttributes {
 
-   private Double temperature;
+    private String name;
 
-   private Double humidity;
+    private Double temperature;
 
-   private String time;
+    private Double humidity;
 
-    public WeatherAttributes(Double temperature, Double humidity, String time) {
+    private String time;
+
+
+    public WeatherAttributes(String name, Double temperature, Double humidity, String time) {
+        this.name = name;
         this.temperature = temperature;
         this.humidity = humidity;
         this.time = time;
@@ -38,10 +42,19 @@ public class WeatherAttributes {
         this.time = time;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "WeatherAttributes{" +
-                "temperature=" + temperature +
+                "name='" + name + '\'' +
+                ", temperature=" + temperature +
                 ", humidity=" + humidity +
                 ", time='" + time + '\'' +
                 '}';

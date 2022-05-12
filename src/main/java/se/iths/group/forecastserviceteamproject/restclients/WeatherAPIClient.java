@@ -3,7 +3,10 @@ package se.iths.group.forecastserviceteamproject.restclients;
 import org.springframework.web.client.RestTemplate;
 import se.iths.group.forecastserviceteamproject.weatherAPI.ForecastWeatherAPI;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class WeatherAPIClient {
 
@@ -23,12 +26,18 @@ public class WeatherAPIClient {
 
     public String getTime() {
         String localTimeString = localTime.toString();
-        System.out.println(localTimeString);
+
         String local = localTimeString.substring(0, 2);
-        // System.out.println(local);
+
         Integer hourNow = Integer.parseInt(local);
 
         String time = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getTime();
+
+        LocalDateTime time2 = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        time = time2.minusHours(2).toString();
+
+        time = time + "Z";
 
         return time;
 
