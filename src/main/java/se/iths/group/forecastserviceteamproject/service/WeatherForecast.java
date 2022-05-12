@@ -1,6 +1,6 @@
 package se.iths.group.forecastserviceteamproject.service;
 
-public class WeatherAttributes {
+public class WeatherForecast {
 
     private String name;
 
@@ -11,7 +11,7 @@ public class WeatherAttributes {
     private String time;
 
 
-    public WeatherAttributes(String name, Double temperature, Double humidity, String time) {
+    public WeatherForecast(String name, Double temperature, Double humidity, String time) {
         this.name = name;
         this.temperature = temperature;
         this.humidity = humidity;

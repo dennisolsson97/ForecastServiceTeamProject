@@ -17,21 +17,12 @@ public class WeatherAPIClient {
     ForecastWeatherAPI weatherAPI = restTemplate.getForObject(baseUrl, ForecastWeatherAPI.class);
 
     LocalTime localTime = LocalTime.now();
-
-    public static void main(String[] args) {
-        WeatherAPIClient weatherAPIClient = new WeatherAPIClient();
-        weatherAPIClient.getTime();
-        weatherAPIClient.getTemperature();
-        weatherAPIClient.getHumidity();
-
-    }
+    String localTimeString = localTime.toString();
+    String hourNowString = localTimeString.substring(0, 2);
+    Integer hourNow = Integer.parseInt(hourNowString);
 
     public String getTime() {
-        String localTimeString = localTime.toString();
 
-        String local = localTimeString.substring(0, 2);
-
-        Integer hourNow = Integer.parseInt(local);
 
         String time = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getTime();
 
@@ -46,9 +37,6 @@ public class WeatherAPIClient {
     }
 
     public double getTemperature() {
-        String localTimeString = localTime.toString();
-        String local = localTimeString.substring(0, 2);
-        Integer hourNow = Integer.parseInt(local);
 
         double temperature = weatherAPI.getForecast()
                 .getForecastday()
@@ -62,9 +50,6 @@ public class WeatherAPIClient {
     }
 
     public double getHumidity() {
-        String localTimeString = localTime.toString();
-        String local = localTimeString.substring(0, 2);
-        Integer hourNow = Integer.parseInt(local);
 
         double humidity = weatherAPI
                 .getForecast()

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import se.iths.group.forecastserviceteamproject.service.ForecastService;
-import se.iths.group.forecastserviceteamproject.service.WeatherAttributes;
+import se.iths.group.forecastserviceteamproject.service.WeatherForecast;
 
 @Controller
 public class BestWeatherController {
@@ -15,8 +15,8 @@ public class BestWeatherController {
 
     @GetMapping("")
     public String getBestWeather(Model model){
-        WeatherAttributes weatherAttributes = forecastService.getBestWeather();
-        model.addAttribute("bestWeather", weatherAttributes);
+        WeatherForecast weatherForecast = forecastService.getBestWeather();
+        model.addAttribute("bestWeather", weatherForecast);
 
         return "index";
     }

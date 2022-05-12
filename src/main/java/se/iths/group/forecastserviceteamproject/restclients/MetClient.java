@@ -17,13 +17,6 @@ public class MetClient {
             .build();
     ForecastMet forecastMet = restTemplate.getForObject(baseurl, ForecastMet.class);
 
-    public static void main(String[] args) {
-        MetClient metClient = new MetClient();
-        metClient.getTime();
-        metClient.getTemperature();
-        metClient.getHumidity();
-
-    }
 
     public String getTime(){
         String time = forecastMet.getProperties().getTimeseries().get(24).getTime();

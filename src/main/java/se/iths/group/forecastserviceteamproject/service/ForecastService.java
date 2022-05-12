@@ -2,11 +2,9 @@ package se.iths.group.forecastserviceteamproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.iths.group.forecastserviceteamproject.met.ForecastMet;
 import se.iths.group.forecastserviceteamproject.restclients.MetClient;
 import se.iths.group.forecastserviceteamproject.restclients.SmhiClient;
 import se.iths.group.forecastserviceteamproject.restclients.WeatherAPIClient;
-import se.iths.group.forecastserviceteamproject.smhi.ForecastSmhi;
 
 import java.util.*;
 
@@ -23,37 +21,37 @@ public class ForecastService {
     WeatherAPIClient weatherAPIClient;
 
 
-    public WeatherAttributes getBestWeather() {
+    public WeatherForecast getBestWeather() {
 
 
-        WeatherAttributes metAttributes = new WeatherAttributes("METI", metClient.getTemperature(), metClient.getHumidity(), metClient.getTime());
-        WeatherAttributes smhiAttributes = new WeatherAttributes("SMHI", smhiClient.getTemperature(), smhiClient.getHumidity(), smhiClient.getTime());
-        WeatherAttributes apiAttributes = new WeatherAttributes("WeatherAPI", weatherAPIClient.getTemperature(), weatherAPIClient.getHumidity(), weatherAPIClient.getTime());
+        WeatherForecast metiForecast = new WeatherForecast("METI", metClient.getTemperature(), metClient.getHumidity(), metClient.getTime());
+        WeatherForecast smhiForecast = new WeatherForecast("SMHI", smhiClient.getTemperature(), smhiClient.getHumidity(), smhiClient.getTime());
+        WeatherForecast wapiForecast = new WeatherForecast("WeatherAPI", weatherAPIClient.getTemperature(), weatherAPIClient.getHumidity(), weatherAPIClient.getTime());
 
-        List<WeatherAttributes> attributes = new ArrayList<>();
+        List<WeatherForecast> forecasts = new ArrayList<>();
 
-        attributes.add(metAttributes);
-        attributes.add(smhiAttributes);
-        attributes.add(apiAttributes);
+        forecasts.add(metiForecast);
+        forecasts.add(smhiForecast);
+        forecasts.add(wapiForecast);
 
-        Comparator<WeatherAttributes> sortByTemperature = ((o1, o2) -> (int) (o2.getTemperature() - o1.getTemperature()));
-        Comparator<WeatherAttributes> sortByHumidity = ((o1, o2) -> (int) (o2.getHumidity() - o1.getHumidity()));
+        Comparator<WeatherForecast> sortByTemperature = ((o1, o2) -> (int) (o2.getTemperature() - o1.getTemperature()));
+        Comparator<WeatherForecast> sortByHumidity = ((o1, o2) -> (int) (o2.getHumidity() - o1.getHumidity()));
 
-        attributes.sort(sortByTemperature);
+        forecasts.sort(sortByTemperature);
 
-        if (attributes.get(0).getTemperature() == attributes.get(2).getTemperature()) {
+        if (forecasts.get(0).getTemperature() == forecasts.get(2).getTemperature()) {
 
-            attributes.sort(sortByHumidity);
+            forecasts.sort(sortByHumidity);
 
-        } else if (attributes.get(0).getTemperature() == attributes.get(1).getTemperature()) {
-            attributes.remove(2);
-            attributes.sort(sortByHumidity);
+        } else if (forecasts.get(0).getTemperature() == forecasts.get(1).getTemperature()) {
+            forecasts.remove(2);
+            forecasts.sort(sortByHumidity);
 
         }
 
-        WeatherAttributes bestWeatherValue = attributes.get(0);
+        WeatherForecast bestWeatherForecast = forecasts.get(0);
 
-        return bestWeatherValue;
+        return bestWeatherForecast;
 
     }
 
