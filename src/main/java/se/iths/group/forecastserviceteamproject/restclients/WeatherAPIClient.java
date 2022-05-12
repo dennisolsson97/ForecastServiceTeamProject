@@ -16,26 +16,42 @@ public class WeatherAPIClient {
     public static void main(String[] args) {
         WeatherAPIClient weatherAPIClient = new WeatherAPIClient();
         weatherAPIClient.getTime();
+        weatherAPIClient.getTemperature();
+        weatherAPIClient.getHumidity();
 
     }
 
-    public void getTime() {
+    public String getTime() {
         String localTimeString = localTime.toString();
         System.out.println(localTimeString);
         String local = localTimeString.substring(0, 2);
-       // System.out.println(local);
+        // System.out.println(local);
         Integer hourNow = Integer.parseInt(local);
 
         String time = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getTime();
-        System.out.println(time);
 
-
+        return time;
 
     }
 
-    public void getTemperature() {
+    public double getTemperature() {
+        String localTimeString = localTime.toString();
+        String local = localTimeString.substring(0, 2);
+        Integer hourNow = Integer.parseInt(local);
 
-       // weatherAPI.
+        double temperature = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getTempC();
 
+        return temperature;
+
+    }
+
+    public double getHumidity() {
+        String localTimeString = localTime.toString();
+        String local = localTimeString.substring(0, 2);
+        Integer hourNow = Integer.parseInt(local);
+
+        double humidity = weatherAPI.getForecast().getForecastday().get(1).getHour().get(hourNow).getHumidity();
+
+        return humidity;
     }
 }
