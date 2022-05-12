@@ -3,6 +3,7 @@ package se.iths.group.forecastserviceteamproject.restclients;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import se.iths.group.forecastserviceteamproject.smhi.ForecastSmhi;
 import se.iths.group.forecastserviceteamproject.smhi.Parameter;
@@ -12,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SmhiClient {
 
     RestTemplate restTemplate = new RestTemplate();

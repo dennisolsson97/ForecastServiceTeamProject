@@ -1,5 +1,6 @@
 package se.iths.group.forecastserviceteamproject.restclients;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import se.iths.group.forecastserviceteamproject.weatherAPI.ForecastWeatherAPI;
 
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+@Component
 public class WeatherAPIClient {
 
     RestTemplate restTemplate = new RestTemplate();

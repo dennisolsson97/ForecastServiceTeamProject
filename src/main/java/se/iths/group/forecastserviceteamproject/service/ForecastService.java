@@ -1,6 +1,7 @@
 package se.iths.group.forecastserviceteamproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import se.iths.group.forecastserviceteamproject.met.ForecastMet;
 import se.iths.group.forecastserviceteamproject.restclients.MetClient;
 import se.iths.group.forecastserviceteamproject.restclients.SmhiClient;
@@ -9,6 +10,7 @@ import se.iths.group.forecastserviceteamproject.smhi.ForecastSmhi;
 
 import java.util.*;
 
+@Service
 public class ForecastService {
 
     @Autowired
@@ -20,20 +22,6 @@ public class ForecastService {
     @Autowired
     WeatherAPIClient weatherAPIClient;
 
-    public ForecastService(SmhiClient smhiClient, MetClient metClient, WeatherAPIClient weatherAPIClient) {
-        this.smhiClient = smhiClient;
-        this.metClient = metClient;
-        this.weatherAPIClient = weatherAPIClient;
-    }
-
-    public static void main(String[] args) {
-        SmhiClient smhiClient = new SmhiClient();
-        MetClient metClient = new MetClient();
-        WeatherAPIClient wheatherAPi = new WeatherAPIClient();
-
-        ForecastService forecastService = new ForecastService(smhiClient, metClient, wheatherAPi);
-        forecastService.getBestWeather();
-    }
 
     public WeatherAttributes getBestWeather() {
 
@@ -65,14 +53,8 @@ public class ForecastService {
 
         WeatherAttributes bestWeatherValue = attributes.get(0);
 
-        System.out.println(metAttributes);
-        System.out.println(smhiAttributes);
-        System.out.println(apiAttributes);
-
-        System.out.println(bestWeatherValue);
-
-
         return bestWeatherValue;
+
     }
 
 
