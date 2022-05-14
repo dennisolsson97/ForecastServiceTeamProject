@@ -2,10 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BestWeather</title>
+    <title>Menu Of The Week</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.1/css/bootstrap.min.css" type="text/css"/>
 </head>
-<body>
-<label>[[${bestWeather}]]</label>
+<body >
 
+<div class="border border-secondary p-4 rounded container-fluid" style="color: cornflowerblue">
+
+    <div class='img-fluid w-100' style="background-image:
+url('https://wxmanreno.files.wordpress.com/2017/08/sunny.jpg'); height: 100vh;
+background-repeat: no-repeat; background-position: center;
+max-width: 100%">
+
+        <br/>
+        <br/>
+        <div class="border border-secondary p-4 rounded opacity-80"
+             style="background-color: snow; max-width: 400px; margin: 0 auto">
+            <div class="container-fluid text-center">
+
+                <div class="h2" style="color: cornflowerblue;font-family: fantasy">Best Weather Forecast</div>
+                <div class="h2" style="color: cornflowerblue;font-family: fantasy">Liljeholmen</div>
+                    <div class="form-group row">
+                <label class="col-sm-4 p-1">Name</label>
+                <div class="col-sm-5 mb-4 p-1">
+                    <label>[[${bestWeather.name}]]</label>
+                </div>
+                        <label class="col-sm-4 p-1">Temperature</label>
+                        <div class="col-sm-5 mb-4 p-1">
+                            <label>[[${bestWeather.temperature}]] °C</label>
+                        </div>
+                        <label class="col-sm-4 p-1">Humidity</label>
+                        <div class="col-sm-5 mb-4 p-1">
+                            <label>[[${bestWeather.humidity}]] %</label>
+                        </div>
+                        <label class="col-sm-4 p-1">Time</label>
+                        <div class="col-sm-5 mb-4 p-1">
+                            <label>[[${bestWeather.time}]]</label>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
+</html>
 </html>
