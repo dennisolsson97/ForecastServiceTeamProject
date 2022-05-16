@@ -36,7 +36,7 @@ public class WeatherAPIClient {
 
     }
 
-    public double getTemperature() {
+    public Double getTemperature() {
 
         double temperature = weatherAPI.getForecast()
                 .getForecastday()
@@ -49,7 +49,7 @@ public class WeatherAPIClient {
 
     }
 
-    public double getHumidity() {
+    public Double getHumidity() {
 
         double humidity = weatherAPI
                 .getForecast()

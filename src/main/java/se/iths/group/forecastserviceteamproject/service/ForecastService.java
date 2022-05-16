@@ -7,6 +7,7 @@ import se.iths.group.forecastserviceteamproject.restclients.SmhiClient;
 import se.iths.group.forecastserviceteamproject.restclients.WeatherAPIClient;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ForecastService {
@@ -20,6 +21,11 @@ public class ForecastService {
     @Autowired
     WeatherAPIClient weatherAPIClient;
 
+    public ForecastService(SmhiClient smhiClient, MetClient metClient, WeatherAPIClient weatherAPIClient) {
+        this.smhiClient = smhiClient;
+        this.metClient = metClient;
+        this.weatherAPIClient = weatherAPIClient;
+    }
 
     public WeatherForecast getBestWeather() {
 
@@ -34,18 +40,19 @@ public class ForecastService {
         forecasts.add(smhiForecast);
         forecasts.add(wapiForecast);
 
-        Comparator<WeatherForecast> sortByTemperature = ((o1, o2) -> (int) (o2.getTemperature() - o1.getTemperature()));
-        Comparator<WeatherForecast> sortByHumidity = ((o1, o2) -> (int) (o2.getHumidity() - o1.getHumidity()));
 
-        forecasts.sort(sortByTemperature);
+        forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getTemperature(), e1.getTemperature())).collect(Collectors.toList());
 
-        if (forecasts.get(0).getTemperature() == forecasts.get(2).getTemperature()) {
 
-            forecasts.sort(sortByHumidity);
 
-        } else if (forecasts.get(0).getTemperature() == forecasts.get(1).getTemperature()) {
+        if (Double.compare(forecasts.get(0).getTemperature(), forecasts.get(2).getTemperature()) == 0) {
+
+            forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getHumidity(), e1.getHumidity())).collect(Collectors.toList());
+
+
+        } else if (Double.compare(forecasts.get(0).getTemperature(), forecasts.get(1).getTemperature()) == 0) {
             forecasts.remove(2);
-            forecasts.sort(sortByHumidity);
+            forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getHumidity(), e1.getHumidity())).collect(Collectors.toList());
 
         }
 
@@ -54,6 +61,12 @@ public class ForecastService {
         return bestWeatherForecast;
 
     }
+
+
+
+
+
+
 
 
 
