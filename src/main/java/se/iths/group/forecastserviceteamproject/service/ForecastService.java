@@ -2,9 +2,10 @@ package se.iths.group.forecastserviceteamproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.iths.group.forecastserviceteamproject.restclients.MetClient;
-import se.iths.group.forecastserviceteamproject.restclients.SmhiClient;
-import se.iths.group.forecastserviceteamproject.restclients.WeatherAPIClient;
+import se.iths.group.forecastserviceteamproject.business.model.weatherforecast.WeatherForecast;
+import se.iths.group.forecastserviceteamproject.dao.restclients.MetClient;
+import se.iths.group.forecastserviceteamproject.dao.restclients.SmhiClient;
+import se.iths.group.forecastserviceteamproject.dao.restclients.WeatherAPIClient;
 
 import java.util.*;
 import java.util.stream.Collectors;
