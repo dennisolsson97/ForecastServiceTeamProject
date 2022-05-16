@@ -41,20 +41,20 @@ public class ForecastService {
         forecasts.add(smhiForecast);
         forecasts.add(wapiForecast);
 
+        Comparator<WeatherForecast> sortByTemperature = (o1, o2) -> (o2.getTemperature().compareTo(o1.getTemperature()));
+        Comparator<WeatherForecast> sortByHumidity = (o1, o2) -> (o2.getHumidity().compareTo(o1.getHumidity()));
 
-        forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getTemperature(), e1.getTemperature())).collect(Collectors.toList());
+        forecasts.sort(sortByTemperature);
 
 
 
         if (Double.compare(forecasts.get(0).getTemperature(), forecasts.get(2).getTemperature()) == 0) {
 
-            forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getHumidity(), e1.getHumidity())).collect(Collectors.toList());
-
+            forecasts.sort(sortByHumidity);
 
         } else if (Double.compare(forecasts.get(0).getTemperature(), forecasts.get(1).getTemperature()) == 0) {
             forecasts.remove(2);
-            forecasts = forecasts.stream().sorted((e1, e2) -> Double.compare( e2.getHumidity(), e1.getHumidity())).collect(Collectors.toList());
-
+            forecasts.sort(sortByHumidity);
         }
 
         WeatherForecast bestWeatherForecast = forecasts.get(0);
@@ -62,14 +62,6 @@ public class ForecastService {
         return bestWeatherForecast;
 
     }
-
-
-
-
-
-
-
-
 
 
 }
