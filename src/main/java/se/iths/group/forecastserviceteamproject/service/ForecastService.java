@@ -3,9 +3,9 @@ package se.iths.group.forecastserviceteamproject.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.iths.group.forecastserviceteamproject.business.model.weatherforecast.WeatherForecast;
-import se.iths.group.forecastserviceteamproject.dao.restclients.MetClient;
-import se.iths.group.forecastserviceteamproject.dao.restclients.SmhiClient;
-import se.iths.group.forecastserviceteamproject.dao.restclients.WeatherAPIClient;
+import se.iths.group.forecastserviceteamproject.dao.restclients.met.MetClient;
+import se.iths.group.forecastserviceteamproject.dao.restclients.smhi.SmhiClient;
+import se.iths.group.forecastserviceteamproject.dao.restclients.weatherAPI.WeatherAPIClient;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,11 +22,6 @@ public class ForecastService {
     @Autowired
     WeatherAPIClient weatherAPIClient;
 
-    public ForecastService(SmhiClient smhiClient, MetClient metClient, WeatherAPIClient weatherAPIClient) {
-        this.smhiClient = smhiClient;
-        this.metClient = metClient;
-        this.weatherAPIClient = weatherAPIClient;
-    }
 
     public WeatherForecast getBestWeather() {
 
